@@ -1,11 +1,17 @@
+[providers]
+python = "3.11"
+
 [phases.setup]
 providers = ["python"]
 
 [phases.install]
-cmds = ["pip install -r requirements.txt"]
+cmds = ["pip install --upgrade pip", "pip install -r requirements.txt"]
 
 [phases.build]
 cmds = []
 
 [start]
 cmd = "python src/main.py"
+
+[variables]
+NIXPACKS_PYTHON_VERSION = "3.11"
