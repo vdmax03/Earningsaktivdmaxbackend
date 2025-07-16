@@ -6,7 +6,9 @@ settings:
 
 importers:
 
-  .:
+  .: {}
+
+  earning-sakti-frontend:
     dependencies:
       '@fingerprintjs/fingerprintjs':
         specifier: ^4.6.2
