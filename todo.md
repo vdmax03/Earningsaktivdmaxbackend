@@ -7,5 +7,8 @@
 - [x] Fix Netlify deployment configuration
 - [x] Add pnpm-workspace.yaml for monorepo
 - [x] Update netlify.toml for correct build path
+- [x] Update pnpm-lock.yaml to match package.json
+- [x] Fix Netlify build configuration with --no-frozen-lockfile
+- [x] Remove pnpm version constraint to avoid corepack issues
 - [ ] Verify deployment success
 
