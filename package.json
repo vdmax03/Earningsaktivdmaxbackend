@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Digital Revenue Automation Platform",
   "private": true,
-  "workspaces": [
-    "earning-sakti-frontend",
-    "earning-sakti-backend"
-  ],
+
   "scripts": {
     "dev:frontend": "cd earning-sakti-frontend && pnpm dev",
     "dev:backend": "cd earning-sakti-backend && python src/main.py",
@@ -14,9 +11,7 @@
     "install:all": "cd earning-sakti-frontend && pnpm install && cd ../earning-sakti-backend && pip install -r requirements.txt",
     "test": "echo \"No tests specified\""
   },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
+
   "engines": {
     "node": ">=20.14.0",
     "python": ">=3.8"

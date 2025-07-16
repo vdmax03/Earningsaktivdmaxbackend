@@ -1,6 +1,8 @@
 [build]
-  command = "npm run build"
+  command = "pnpm install && pnpm build"
   publish = "dist"
+  base = "earning-sakti-frontend"
 
 [build.environment]
   NODE_VERSION = "20.14.0"
+  PNPM_VERSION = "10.12.4"

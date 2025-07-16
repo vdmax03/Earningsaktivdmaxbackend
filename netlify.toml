@@ -1,6 +1,14 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "cd earning-sakti-frontend && pnpm install && pnpm build"
+  publish = "earning-sakti-frontend/dist"
+  base = "."
 
 [build.environment]
   NODE_VERSION = "20.14.0"
+  PNPM_VERSION = "10.12.4"
+
+# Redirect all routes to index.html for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

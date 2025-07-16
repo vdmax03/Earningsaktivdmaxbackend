@@ -2,7 +2,7 @@
 - [x] Membuat monorepo structure
 - [x] Menambahkan steering documents
 - [x] Setup git repository
-- [ ] Create GitHub repository
-- [ ] Push to GitHub
+- [x] Create GitHub repository
+- [x] Push to GitHub
 - [ ] Update deployment configurations
 
