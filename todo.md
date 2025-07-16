@@ -10,5 +10,8 @@
 - [x] Update pnpm-lock.yaml to match package.json
 - [x] Fix Netlify build configuration with --no-frozen-lockfile
 - [x] Remove pnpm version constraint to avoid corepack issues
+- [x] Switch from pnpm to npm to avoid corepack issues
+- [x] Remove packageManager field from package.json
+- [x] Downgrade Node.js to 18.19.0 for better compatibility
 - [ ] Verify deployment success
 
