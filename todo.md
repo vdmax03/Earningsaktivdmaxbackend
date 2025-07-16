@@ -13,5 +13,7 @@
 - [x] Switch from pnpm to npm to avoid corepack issues
 - [x] Remove packageManager field from package.json
 - [x] Downgrade Node.js to 18.19.0 for better compatibility
-- [ ] Verify deployment success
+- [x] Fix frontend API URL configuration for production
+- [ ] Fix backend deployment on Manus Cloud (URL not accessible)
+- [ ] Verify full stack deployment success
 
