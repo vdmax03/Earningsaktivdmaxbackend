@@ -4,5 +4,8 @@
 - [x] Setup git repository
 - [x] Create GitHub repository
 - [x] Push to GitHub
-- [ ] Update deployment configurations
+- [x] Fix Netlify deployment configuration
+- [x] Add pnpm-workspace.yaml for monorepo
+- [x] Update netlify.toml for correct build path
+- [ ] Verify deployment success
 
