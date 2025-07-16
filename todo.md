@@ -14,6 +14,10 @@
 - [x] Remove packageManager field from package.json
 - [x] Downgrade Node.js to 18.19.0 for better compatibility
 - [x] Fix frontend API URL configuration for production
-- [ ] Fix backend deployment on Manus Cloud (URL not accessible)
+- [x] Prepare backend for Railway/Render deployment
+- [x] Add deployment configs (railway.json, render.yaml, Procfile)
+- [x] Fix port binding for production deployment
+- [ ] Deploy backend to Railway or Render
+- [ ] Update frontend API URL with new backend URL
 - [ ] Verify full stack deployment success
 
