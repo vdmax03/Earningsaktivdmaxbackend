@@ -1,4 +1,8 @@
-- [ ] Mengumpulkan semua file proyek
-- [ ] Mengompres file ke format ZIP
-- [ ] Mengirim file ZIP kepada user
+- [x] Mengumpulkan semua file proyek
+- [x] Membuat monorepo structure
+- [x] Menambahkan steering documents
+- [x] Setup git repository
+- [ ] Create GitHub repository
+- [ ] Push to GitHub
+- [ ] Update deployment configurations
 
