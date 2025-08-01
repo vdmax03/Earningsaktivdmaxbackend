@@ -36,7 +36,7 @@ app.register_blueprint(effects_bp, url_prefix='/api')
 # --- Database Configuration ---
 db_path = os.path.join(os.path.dirname(__file__), 'database')
 os.makedirs(db_path, exist_ok=True) # Ensure the database directory exists
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(db_path, 'app.db')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', f"sqlite:///{os.path.join(db_path, 'app.db')}")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
