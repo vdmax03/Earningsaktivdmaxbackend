@@ -90,10 +90,15 @@ def test_endpoint():
 # --- Simple Health Check (no database) ---
 @app.route('/ping')
 def ping():
-    return {'status': 'pong', 'message': 'Server is alive'}, 200
+    print("Ping endpoint called")  # Debug log
+    return {'status': 'pong', 'message': 'Server is alive', 'timestamp': datetime.datetime.utcnow().isoformat()}, 200
+
+# --- Root Endpoint ---
+@app.route('/')
+def root():
+    return {'message': 'Earning Sakti Backend API', 'status': 'running'}, 200
 
 # --- Route for Serving the React Frontend ---
-@app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react_app(path):
     # This catch-all route serves the React app and handles client-side routing.
