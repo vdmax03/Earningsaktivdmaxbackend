@@ -43,6 +43,11 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+# --- Healthcheck Endpoint ---
+@app.route('/health')
+def health_check():
+    return {'status': 'healthy', 'message': 'Earning Sakti Backend is running'}, 200
+
 # --- Route for Serving the React Frontend ---
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
