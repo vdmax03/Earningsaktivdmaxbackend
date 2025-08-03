@@ -52,6 +52,22 @@ with app.app_context():
     try:
         db.create_all()
         print("Database tables initialized successfully")
+        
+        # Create default user if not exists
+        from .models.user import User
+        default_user = User.query.filter_by(username='admin').first()
+        if not default_user:
+            user = User(
+                username='admin',
+                email='admin@example.com'
+            )
+            user.set_password('admin123')
+            db.session.add(user)
+            db.session.commit()
+            print("✅ Default user created: admin/admin123")
+        else:
+            print("ℹ️ Default user already exists: admin/admin123")
+            
     except Exception as e:
         print(f"Warning: Database initialization failed: {e}")
         # Continue running the app even if database init fails
@@ -86,6 +102,26 @@ def health_check():
 @app.route('/api/test')
 def test_endpoint():
     return {'message': 'API is working correctly'}, 200
+
+# --- Users Endpoint (for debugging) ---
+@app.route('/api/users')
+def list_users():
+    try:
+        from .models.user import User
+        users = User.query.all()
+        return {
+            'users': [
+                {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email,
+                    'created_at': user.created_at.isoformat() if user.created_at else None
+                }
+                for user in users
+            ]
+        }, 200
+    except Exception as e:
+        return {'error': str(e)}, 500
 
 # --- Simple Health Check (no database) ---
 @app.route('/ping')
