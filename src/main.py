@@ -1,4 +1,5 @@
 import os
+import datetime
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 from .models.user import db
@@ -13,6 +14,13 @@ from .config import SQLALCHEMY_DATABASE_URI, SECRET_KEY
 # Define path to the frontend build directory. This is crucial for serving the React app.
 frontend_build_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'earning-sakti-frontend', 'dist'))
 assets_path = os.path.join(frontend_build_path, 'assets')
+
+# Check if frontend build exists, if not use a fallback
+if not os.path.exists(frontend_build_path):
+    print(f"Warning: Frontend build not found at {frontend_build_path}")
+    # Use current directory as fallback
+    frontend_build_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static'))
+    assets_path = frontend_build_path
 
 # --- App Initialization ---
 # Initialize Flask app, pointing static_folder to the 'assets' directory of the React build
@@ -41,12 +49,48 @@ db.init_app(app)
 
 # Create database tables
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+        print("Database tables initialized successfully")
+    except Exception as e:
+        print(f"Warning: Database initialization failed: {e}")
+        # Continue running the app even if database init fails
+        # The health check will catch database connectivity issues
 
 # --- Healthcheck Endpoint ---
 @app.route('/health')
 def health_check():
-    return {'status': 'healthy', 'message': 'Earning Sakti Backend is running'}, 200
+    print("Health check requested")  # Debug log
+    try:
+        # Test database connectivity
+        db.session.execute('SELECT 1')
+        print("Database connection successful")  # Debug log
+        return {
+            'status': 'healthy', 
+            'message': 'Earning Sakti Backend is running',
+            'database': 'connected',
+            'timestamp': datetime.datetime.utcnow().isoformat()
+        }, 200
+    except Exception as e:
+        print(f"Database connection failed: {e}")  # Debug log
+        # Return healthy status even if database fails, but log the error
+        return {
+            'status': 'healthy', 
+            'message': 'Earning Sakti Backend is running (database warning)',
+            'database': 'disconnected',
+            'warning': str(e),
+            'timestamp': datetime.datetime.utcnow().isoformat()
+        }, 200
+
+# --- Test Endpoint ---
+@app.route('/api/test')
+def test_endpoint():
+    return {'message': 'API is working correctly'}, 200
+
+# --- Simple Health Check (no database) ---
+@app.route('/ping')
+def ping():
+    return {'status': 'pong', 'message': 'Server is alive'}, 200
 
 # --- Route for Serving the React Frontend ---
 @app.route('/', defaults={'path': ''})

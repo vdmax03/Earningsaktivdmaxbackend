@@ -3,7 +3,7 @@ services:
     name: earning-sakti-backend
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --workers 4 --bind 0.0.0.0:$PORT 'main:app' --chdir src
+    startCommand: gunicorn --workers 4 --bind 0.0.0.0:$PORT src.main:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0

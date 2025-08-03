@@ -65,6 +65,12 @@ def login():
         if not data or not data.get('username') or not data.get('password'):
             return jsonify({'message': 'Missing username or password'}), 400
         
+        # Test database connectivity first
+        try:
+            db.session.execute('SELECT 1')
+        except Exception as db_error:
+            return jsonify({'message': 'Database connection error'}), 503
+        
         user = User.query.filter_by(username=data['username']).first()
         
         if user and user.check_password(data['password']):

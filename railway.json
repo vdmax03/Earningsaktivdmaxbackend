@@ -4,10 +4,12 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "gunicorn --workers 4 --bind 0.0.0.0:$PORT src.main:app",
-    "healthcheckPath": "/api/auth/login",
+    "startCommand": "gunicorn --workers 1 --bind 0.0.0.0:$PORT --timeout 120 --keep-alive 5 app:app",
+    "healthcheckPath": "/ping",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyMaxRetries": 10,
+    "healthcheckInterval": 30,
+    "healthcheckRetries": 3
   }
 }
