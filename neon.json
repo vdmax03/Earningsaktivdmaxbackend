@@ -1,0 +1,32 @@
+{
+  "name": "earning-sakti-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Earning Sakti project",
+  "main": "src/main.py",
+  "scripts": {
+    "start": "gunicorn --workers 4 --bind 0.0.0.0:$PORT src.main:app",
+    "dev": "python src/main.py"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Secret key for JWT tokens",
+      "generator": "secret"
+    },
+    "DATABASE_URL": {
+      "description": "PostgreSQL database URL from Neon",
+      "required": true
+    },
+    "DEBUG": {
+      "description": "Debug mode",
+      "value": "False"
+    }
+  }
+} 
