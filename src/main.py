@@ -31,9 +31,21 @@ app = Flask(__name__, static_folder=assets_path, static_url_path='/assets')
 # Provide a default for development, but set a strong, unique key in production.
 app.config['SECRET_KEY'] = SECRET_KEY
 
-# For development, allow all origins. For production, it's better to restrict this.
-# e.g., CORS(app, resources={r"/api/*": {"origins": "https://0vhlizcp939y.manus.space"}})
-CORS(app)
+# CORS configuration
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://earningsaktivdmax.netlify.app",
+            "https://earningsaktivdmax.netlify.app/",
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "https://railway.com",
+            "https://*.railway.app"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization", "Accept"]
+    }
+})
 
 # --- Blueprints (API Routes) ---
 app.register_blueprint(user_bp, url_prefix='/api')
