@@ -1,6 +1,6 @@
 // Konfigurasi API URL
-// Ganti dengan URL Railway Anda
-export const API_URL = process.env.REACT_APP_API_URL || 'https://your-railway-app-url.railway.app';
+// Railway app URL
+export const API_URL = process.env.REACT_APP_API_URL || 'https://earningsaktivdmaxbackend-production.up.railway.app';
 
 // Konfigurasi untuk development
 export const DEV_API_URL = 'http://localhost:5000';

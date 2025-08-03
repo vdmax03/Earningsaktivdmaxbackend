@@ -91,7 +91,7 @@ def health_check():
     print("Health check requested")  # Debug log
     try:
         # Test database connectivity
-        db.session.execute('SELECT 1')
+        db.session.execute(db.text('SELECT 1'))
         print("Database connection successful")  # Debug log
         return {
             'status': 'healthy', 
@@ -134,6 +134,36 @@ def list_users():
         }, 200
     except Exception as e:
         return {'error': str(e)}, 500
+
+# --- Create Default User Endpoint ---
+@app.route('/api/create-default-user', methods=['POST'])
+def create_default_user():
+    try:
+        from .models.user import User
+        
+        # Check if admin user already exists
+        existing_user = User.query.filter_by(username='admin').first()
+        if existing_user:
+            return {'message': 'Default user already exists', 'user': existing_user.to_dict()}, 200
+        
+        # Create default user
+        user = User(
+            username='admin',
+            email='admin@example.com'
+        )
+        user.set_password('admin123')
+        
+        db.session.add(user)
+        db.session.commit()
+        
+        return {
+            'message': 'Default user created successfully',
+            'user': user.to_dict()
+        }, 201
+        
+    except Exception as e:
+        db.session.rollback()
+        return {'error': f'Failed to create default user: {str(e)}'}, 500
 
 # --- Simple Health Check (no database) ---
 @app.route('/ping')

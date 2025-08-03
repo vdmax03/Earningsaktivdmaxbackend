@@ -67,7 +67,7 @@ def login():
         
         # Test database connectivity first
         try:
-            db.session.execute('SELECT 1')
+            db.session.execute(db.text('SELECT 1'))
         except Exception as db_error:
             return jsonify({'message': 'Database connection error'}), 503
         
